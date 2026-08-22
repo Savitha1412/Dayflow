@@ -470,27 +470,51 @@
 
 function login() {
 
-    const email = document.getElementById("email").value;
+    const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
     const role = document.getElementById("role").value;
+    const error = document.getElementById("error");
 
-    if (email === "" || password === "") {
+    error.innerText = "";
 
-        document.getElementById("error").innerText =
-            "Please enter email and password.";
+    // Demo accounts for hackathon prototype
+    const employeeEmail = "employee@dayflow.com";
+    const employeePassword = "employee123";
 
-        return;
-    }
+    const adminEmail = "admin@dayflow.com";
+    const adminPassword = "admin123";
 
-    document.getElementById("loginPage").style.display = "none";
-    document.getElementById("dashboard").style.display = "block";
+    if (role === "employee") {
 
-    if (role === "admin") {
-        document.getElementById("welcome").innerText =
-            "Welcome, Admin / HR";
+        if (email === employeeEmail && password === employeePassword) {
+
+            document.getElementById("loginPage").style.display = "none";
+            document.getElementById("dashboard").style.display = "block";
+
+            document.getElementById("welcome").innerText =
+                "Welcome, Employee";
+
+        } else {
+
+            error.innerText =
+                "Invalid Employee email or password.";
+        }
+
     } else {
-        document.getElementById("welcome").innerText =
-            "Welcome, Employee";
+
+        if (email === adminEmail && password === adminPassword) {
+
+            document.getElementById("loginPage").style.display = "none";
+            document.getElementById("dashboard").style.display = "block";
+
+            document.getElementById("welcome").innerText =
+                "Welcome, Admin / HR";
+
+        } else {
+
+            error.innerText =
+                "Invalid Admin email or password.";
+        }
     }
 }
 
